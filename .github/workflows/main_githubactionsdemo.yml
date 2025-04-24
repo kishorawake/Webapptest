@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_199e0c3c3b24483783a8ed9b75522822 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_fc4213e454564edea7f5791f46791a0c }}
+        username: ${{ vars.DOCKERHUB_USERNAME}}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_199e0c3c3b24483783a8ed9b75522822 }}/webapp:${{ github.sha }}
+        tags: index.docker.io/${{ vars.DOCKERHUB_USERNAME}}/webapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'githubactionsdemo'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_685a59177c2d438d971a7c225b1538d8 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_199e0c3c3b24483783a8ed9b75522822 }}/webapp:${{ github.sha }}'
+        images: 'index.docker.io/${{ vars.DOCKERHUB_USERNAME}}/webapp:${{ github.sha }}'
