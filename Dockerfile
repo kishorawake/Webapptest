@@ -11,8 +11,11 @@ RUN npm install
 # Copy the app source
 COPY . .
 
-# Expose the port the app runs on
+# Ensure Azure can assign the listening port
+ENV PORT=3000
+
+# Expose the correct port
 EXPOSE 3000
 
-# Start the app
+# Start the app — Azure will respect this CMD
 CMD ["npm", "start"]
