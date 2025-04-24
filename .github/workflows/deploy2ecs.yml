@@ -24,6 +24,7 @@ jobs:
         with:
            dockerfile: ./Dockerfile
            context: .
+           push: true
            tags: |
              ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
              ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
