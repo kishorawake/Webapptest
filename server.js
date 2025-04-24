@@ -11,9 +11,12 @@ app.use((req, res, next) => {
 // Root route
 app.get('/', (req, res) => {
   res.send(`
-    <h1>🚀 Hello from Node.js on Azure!</h1>
-    <p>Welcome to your containerized web app! 🎉</p>
-    <p>Try <a href="/joke">/joke</a> or <a href="/status">/status</a></p>
+    <h1 style="color: #4CAF50; text-align: center;">🚀 Hello from Node.js on Docker!</h1>
+    <p style="font-size: 18px; text-align: center;">Welcome to your containerized web app! 🎉</p>
+    <p style="text-align: center;">
+      Try <a href="/joke" style="color: #2196F3; font-weight: bold;">/joke</a> or 
+      <a href="/status" style="color: #2196F3; font-weight: bold;">/status</a>
+    </p>
   `);
 });
 
@@ -26,17 +29,25 @@ app.get('/joke', (req, res) => {
     "I would tell you a UDP joke, but you might not get it. 📡"
   ];
   const random = jokes[Math.floor(Math.random() * jokes.length)];
-  res.send(`<h2>😂 Here's a joke:</h2><p>${random}</p>`);
+  res.send(`
+    <h2 style="color: #FF5722; text-align: center;">😂 Here's a joke:</h2>
+    <p style="font-size: 20px; text-align: center; font-style: italic;">${random}</p>
+  `);
 });
 
 // A simple status check
 app.get('/status', (req, res) => {
-  res.json({ status: "🟢 All systems go!", uptime: process.uptime().toFixed(2) + " seconds" });
+  res.json({ 
+    status: "🟢 All systems go!", 
+    uptime: process.uptime().toFixed(2) + " seconds" 
+  });
 });
 
 // 404 route
 app.use((req, res) => {
-  res.status(404).send("😕 Whoops! This page doesn't exist.");
+  res.status(404).send(`
+    <h1 style="color: #F44336; text-align: center;">😕 Whoops! This page doesn't exist.</h1>
+  `);
 });
 
 // Start the server

@@ -1,21 +1,18 @@
-# Use Node.js LTS base image
-FROM node:18
+# Use official Node.js LTS version
+FROM node:16
 
-# Create app directory
-WORKDIR /usr/src/app
+# Set the working directory inside the container
+WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
+# Copy package.json and install dependencies
+COPY package.json /app
 RUN npm install
 
-# Copy the app source
-COPY . .
+# Copy the rest of the application code
+COPY . /app
 
-# Ensure Azure can assign the listening port
-ENV PORT=3000
-
-# Expose the correct port
+# Expose the port that the app will run on
 EXPOSE 3000
 
-# Start the app — Azure will respect this CMD
+# Command to run the app
 CMD ["npm", "start"]
