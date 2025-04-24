@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: kishorawake934/webapp:latest
+          tags: kishorawake934/webapp:latest_blue
           file: ./Dockerfile
           context: . 
            
