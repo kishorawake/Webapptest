@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');  // For pulling data from external APIs
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 // Middleware for logging
 app.use((req, res, next) => {
