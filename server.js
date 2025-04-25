@@ -139,6 +139,23 @@ app.get('/image', (req, res) => {
   `);
 });
 
+// App status route
+app.get('/status', (req, res) => {
+  res.json({ 
+    status: "🟢 All systems go!", 
+    uptime: process.uptime().toFixed(2) + " seconds" 
+  });
+});
+
+// Server time route
+app.get('/time', (req, res) => {
+  const now = new Date();
+  res.send(`
+    <h2 style="color: #3F51B5; text-align: center;">🕒 Current Server Time</h2>
+    <p style="font-size: 20px; text-align: center;">${now.toUTCString()}</p>
+  `);
+});
+
 // 404 Route
 app.use((req, res) => {
   res.status(404).send(`
