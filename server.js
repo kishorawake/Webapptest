@@ -42,6 +42,46 @@ app.get('/status', (req, res) => {
     uptime: process.uptime().toFixed(2) + " seconds" 
   });
 });
+// Quote route
+app.get('/quote', (req, res) => {
+  const quotes = [
+    "“Talk is cheap. Show me the code.” – Linus Torvalds",
+    "“Programs must be written for people to read, and only incidentally for machines to execute.” – Harold Abelson",
+    "“Code is like humor. When you have to explain it, it’s bad.” – Cory House",
+    "“First, solve the problem. Then, write the code.” – John Johnson",
+    "“Experience is the name everyone gives to their mistakes.” – Oscar Wilde"
+  ];
+  const random = quotes[Math.floor(Math.random() * quotes.length)];
+  res.send(`
+    <h2 style="color: #673AB7; text-align: center;">📜 Random Quote</h2>
+    <p style="font-size: 22px; text-align: center; font-style: italic;">${random}</p>
+  `);
+});
+
+// Random image route
+app.get('/image', (req, res) => {
+  const images = [
+    "https://picsum.photos/seed/dev1/600/400",
+    "https://picsum.photos/seed/code2/600/400",
+    "https://picsum.photos/seed/docker3/600/400",
+    "https://picsum.photos/seed/k8s4/600/400",
+    "https://picsum.photos/seed/tech5/600/400"
+  ];
+  const randomImage = images[Math.floor(Math.random() * images.length)];
+  res.send(`
+    <html>
+      <head>
+        <title>Random Image</title>
+      </head>
+      <body style="text-align: center; background-color: #f0f0f0; font-family: sans-serif;">
+        <h2 style="color: #009688;">🖼️ Here's a Random Image</h2>
+        <img src="${randomImage}" alt="Random image" style="max-width: 90%; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
+        <p><a href="/image">🔄 Refresh</a> | <a href="/">🏠 Home</a></p>
+      </body>
+    </html>
+  `);
+});
+
 
 // 404 route
 app.use((req, res) => {
